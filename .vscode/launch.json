@@ -1,0 +1,21 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "Launch Chrome against localhost",
+      "url": "http://localhost:5173",
+      "webRoot": "${workspaceFolder}",
+      "sourceMaps": true, 
+      "trace": true,
+      "skipFiles": [    // node_modules 안에 있는 모든 파일들을 디버깅 할 때 스킵
+        "${workspaceFolder}/node_modules/**",
+        "**/@vite/**"
+      ]
+    }
+  ]
+}
