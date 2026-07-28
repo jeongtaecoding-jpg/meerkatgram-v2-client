@@ -1,6 +1,7 @@
 <script setup>
 import { useRouter } from 'vue-router';
 import { useAuthStore } from '../store/auth/useAuthStore';
+import { usePostStatisticsStore } from '../store/post/usePostStatisticsStore';
 
 const authStore = useAuthStore();
 const router = useRouter();
