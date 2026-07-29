@@ -3,7 +3,7 @@ import { computed, ref } from "vue";
 import myAxios from "../../api/myAxios";
 import { useMyErrorStore } from "../error/useMyErrorStore";
 
-export const usePostIndexStore = defineStore('postIndexStore', () => {
+export const usePostIndexStore = defineStore('postIndex', () => {
     // 1. State (ref)
     const items = ref([]);
     const isLastPage = ref(false);
@@ -32,7 +32,7 @@ export const usePostIndexStore = defineStore('postIndexStore', () => {
 
           const res = await myAxios.get(url, { params });
           const data = res.data.data;
-          isLastPage.value = data.lastPage;
+          isLastPage.value = data.isLastPage;
           items.value.push(...data.posts);
 
           currentPage.value++;

@@ -1,3 +1,10 @@
+<!-- 
+description : 이 파일은 ~~~다.
+버전관리: 
+  - v1 260619 : {홍길동} 초기 작업
+  - v2 260729 : {둘리} 파일 업로드 개선
+-->
+
 <script setup>
 import { reactive, ref } from 'vue';
 import MyButton from '../../components/buttons/MyButton.vue';
@@ -30,7 +37,7 @@ const handleSubmit = async () => {
     registrationValidator.password(registrationData.password),
     registrationValidator.passwordChk(registrationData.password, registrationData.passwordChk),
     registrationValidator.nick(registrationData.nick),
-    registrationValidator.profile(registrationData.profile),
+    // registrationValidator.profile(registrationData.profile),  // v2 del
   ];
 
   const errorList = validationList.filter(val => val);
@@ -41,6 +48,15 @@ const handleSubmit = async () => {
   }
 
   try {
+    // --------------------- v2 add start --------------------- 
+    registrationData.profile = await fileStore.uploadProfile(selectedFile.value);  // v2 add
+
+    if(!registrationData.profile) {
+      alert('파일 업로드 실패');
+      return;
+    }
+    // --------------------- v2 add end --------------------- 
+
     await authStore.registration(registrationData);
     alert("회원가입에 성공했습니다.");
     router.replace('/login');
@@ -66,17 +82,26 @@ const handleChangeProfile = async (e) => {
       URL.revokeObjectURL(preview.value);  
     }
 
+    // --------------------- v2 del start --------------------- 
     // API 서버에 파일 저장 요청
-    const fileUri = await fileStore.uploadProfile(file);
+    // const fileUri = await fileStore.uploadProfile(file);
 
-    if(fileUri) {
-      registrationData.profile = fileUri;  //회원가입할 때 보낼 데이터
+    // if(fileUri) {
+    //   registrationData.profile = fileUri;  //회원가입할 때 보낼 데이터
 
-      selectedFile.value = file;
+    //   selectedFile.value = file;
   
-      // 파일 객체를 브라우저에서 접근 가능한 임시 URL로 변환
-      preview.value = URL.createObjectURL(file);    
-    }
+    //   // 파일 객체를 브라우저에서 접근 가능한 임시 URL로 변환
+    //   preview.value = URL.createObjectURL(file);    
+    // }
+    // --------------------- v2 del end --------------------- 
+
+
+    // --------------------- v2 add start --------------------- 
+    selectedFile.value = file;
+    preview.value = URL.createObjectURL(file);
+    // --------------------- v2 add end --------------------- 
+
 
   }
 }

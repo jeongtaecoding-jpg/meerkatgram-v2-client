@@ -1,8 +1,9 @@
 import { createRouter, createWebHistory } from "vue-router";
 import PostIndex from "../pages/posts/PostIndex.vue";
-import MyError from "../pages/errors/myError.vue";
+import MyError from "../pages/errors/MyError.vue";
 import Login from "../pages/auth/Login.vue";
 import { useAuthStore } from "../store/auth/useAuthStore.js";
+import { usePostStatisticsStore } from "../store/post/usePostStatisticsStore.js";
 import PostShow from "../pages/posts/PostShow.vue";
 import Registration from "../pages/auth/Registration.vue";
 import PostCreate from "../pages/posts/PostCreate.vue";
@@ -64,11 +65,17 @@ const router = createRouter({
 router.beforeEach(async (to, from, next) => {   // to : 내가 이동할 라우트 정보  , from : 내가 이동하기 전 라우트 정보, next : 다음 라우터로 이동하게 해주는 함수
   // authStore
   const authStore = useAuthStore();
+  const postStatisticsStore = usePostStatisticsStore();
 
-  // accessToken(인증)이 없을 때, 토큰 재발급 시도해주는 처리기
+  // accessToken(인증)이 없을 때, && reissue 첫시도시 토큰 재발급 시도
   if(!authStore.isLoggedIn && !authStore.isReissued) {   // 로그인 상태가 아니고, 토큰 재발급이 안된 상태라면
     try {
       await authStore.reissue();
+
+      if(authStore.isLoggedIn) {
+        await postStatisticsStore.getUserPostCount();
+      }
+
     } catch(error) {  
       // alert('로그인 기간이 만료되었습니다. \n다시 로그인 해 주십시오.');
       // return next('/login');   // 위쪽의 async 절의 next

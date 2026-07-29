@@ -4,12 +4,25 @@ import { useRoute, useRouter } from 'vue-router';
 import { usePostShowStore } from '../../store/post/usePostShowStore';
 import { useAuthStore } from '../../store/auth/useAuthStore';
 import { useMyErrorStore } from '../../store/error/useMyErrorStore';
+import { usePostStatisticsStore } from '../../store/post/usePostStatisticsStore';
 
 const route = useRoute();
 const router = useRouter();
 const postShowStore = usePostShowStore();
+const postStatisticsStore = usePostStatisticsStore();
 const authStore = useAuthStore();
 const myErrorStore = useMyErrorStore();
+
+const handleDelete = async () => {
+  try {
+    await postShowStore.deletePost(route.params.id);
+    postStatisticsStore.decrementPostCount();
+    router.push('/');
+  } catch (error) {
+    alert("게시글 삭제 실패했습니다.");
+  }
+  
+}
 
 onBeforeMount(async () => {
   try {
@@ -30,7 +43,8 @@ onBeforeUnmount(postShowStore.clearPostShow);
   <div class="option-box">
     <div 
     class="delete-icon"
-    v-if="postShowStore.post.userId === authStore.userInfo.id"
+    v-if="authStore.userInfo?.role === 'SUPER' && postShowStore.post.userId === authStore.userInfo.id"
+    @click="handleDelete"
     ></div>
     <div v-else></div>  
     <div class="like-box">
@@ -39,7 +53,6 @@ onBeforeUnmount(postShowStore.clearPostShow);
     </div>
   </div>
   <p class="content">{{ postShowStore.post.content}}</p>
-
 </div>
 </template>
 

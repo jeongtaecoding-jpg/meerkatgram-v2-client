@@ -4,10 +4,9 @@ import myAxios from "../../api/myAxios";
 
 export const usePostShowStore = defineStore('postShowStore', () => {
   // 1. State
-  const post = ref();
+  const post = ref(null);
 
   // 2. Getters   
-
 
   // 3. Actions
   const getPost = async (id) => {
@@ -25,9 +24,20 @@ export const usePostShowStore = defineStore('postShowStore', () => {
     post.value = null;
   }
 
+  const deletePost = async (id) => {
+    try {
+      const url = `/api/posts/${id}`;
+
+      const result = await myAxios.delete(url);
+    } catch (error) {
+      throw error;
+    }
+  }
+
   return {
     post,
     getPost,
     clearPostShow,
+    deletePost
   }
 });

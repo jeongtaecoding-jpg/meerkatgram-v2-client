@@ -9,7 +9,7 @@ import { useRouter } from 'vue-router';
 import loginValidator from '../../util/validator/domain/auth/loginValidator.js';
 import { useMyErrorStore } from '../../store/error/useMyErrorStore.js';
 
-const router =  useRouter();
+const router = useRouter();
 const authStore = useAuthStore();
 const postStatisticsStore = usePostStatisticsStore();
 const myErrorStore = useMyErrorStore();
@@ -27,8 +27,7 @@ const handleSubmit = async () => {
     // 유효성 검사 통과 패턴
     try {
       await authStore.login(loginForm); // 로그인 시도
-      postStatisticsStore.getStatisticsPost(); // 로그인 성공 후, 통계 게시글 가져오기
-      
+      postStatisticsStore.getUserPostCount();
       router.replace('/posts');
     } catch(error) {
       if(error.response) {
