@@ -19,9 +19,9 @@ const redirectMain = () => {
   <h2>{{ myErrorStore.errorMsg }}</h2>
   <h2>아래 버튼을 누르시면 메인 페이지로 이동합니다.</h2>
   <MyButton
-    :size="'middle'"
-    :color="'gray'"
-    :content="'Go to Main'"
+    :btnSize="'middle'"
+    :btnStyle="'gray'"
+    :btnContent="'Go to Main'"
     @click="redirectMain()"
   ></MyButton>
 </template>

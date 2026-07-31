@@ -44,6 +44,11 @@ const handleSubmit = async () => {
     alert(`${resultValidationEmail}\n${resultValidationPassword}`);
   }
 }
+
+const socialLogin = (provider) => {
+  window.location.href = `${import.meta.env.VITE_API_BASE_URL}/api/auth/oauth2/authorization/${provider}`;
+}
+
 </script>
 
 <template>
@@ -67,20 +72,27 @@ const handleSubmit = async () => {
 
   <MyButton
     :btn-type="'submit'"
-    :color="'gray'"
-    :size="'middle'"
-    :content="'Log In'"
+    :btnStyle="'gray'"
+    :btnSize="'middle'"
+    :btnContent="'Log In'"
+  ></MyButton>
+
+    <MyButton
+    :btn-type="'button'"
+    :btn-style="'kakao'"
+    :btn-size="'middle'"
+    @click="socialLogin('kakao')"
   ></MyButton>
 
   <MyStrikeThroughBehindWord
-    :content="'or'"
+    :btnContent="'or'"
   ></MyStrikeThroughBehindWord>
 
   <MyButton
     :btn-type="'button'"
-    :color="'white'"
-    :size="'middle'"
-    :content="'Sign Up'"
+    :btnStyle="'white'"
+    :btnSize="'middle'"
+    :btnContent="'Sign Up'"
   ></MyButton>
 
 </form>

@@ -156,9 +156,9 @@ const handleChangeProfile = async (e) => {
 
     <MyButton
       :btnType="'submit'"
-      :color="'black'"
-      :size="'middle'"
-      :content="'Sign Up'"
+      :btnStyle="'black'"
+      :btnSize="'middle'"
+      :btnContent="'Sign Up'"
     ></MyButton>
 
   </form>

@@ -87,7 +87,7 @@ onBeforeUnmount(postShowStore.clearPostShow);
 .delete-icon {
   width: 40px;
   height: 50px;
-  background-image: url('./icons/free-icon-trash-can-bin-12280812.png');
+  background-image: url('./icons/trash-can.png');
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;

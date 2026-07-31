@@ -34,15 +34,15 @@ const redirectPostcreate = () => {
     <div class="redirect-box">
       <div 
         class="bg-image-square redirect-icon-posts-index"
-        style="background-image: url('./icons/free-icon-gallery-833281.png');"
+        style="background-image: url('./icons/gallery.png');"
       ></div>
       <div 
           class="bg-image-square redirect-icon-posts-create"
           @click="redirectPostcreate()"
-          style="background-image: url('./icons/free-icon-plus-sign-3114793.png');"
+          style="background-image: url('./icons/plus-sign.png');"
       ></div>
       <div class="bg-image-square redirect-icon-posts-info"
-          style="background-image: url('./icons/free-icon-person-2815428tt.png');"
+          style="background-image: url('./icons/person.png');"
       ></div>
     </div>
   </div>

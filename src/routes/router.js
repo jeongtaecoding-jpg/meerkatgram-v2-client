@@ -7,6 +7,7 @@ import { usePostStatisticsStore } from "../store/post/usePostStatisticsStore.js"
 import PostShow from "../pages/posts/PostShow.vue";
 import Registration from "../pages/auth/Registration.vue";
 import PostCreate from "../pages/posts/PostCreate.vue";
+import OAuth2Callback from "../pages/auth/OAuth2Callback.vue";
 
 const setMeta = (isAuthenticated, isGuestOnly) => {
   return {
@@ -47,6 +48,11 @@ const routes = [
     path: '/posts/create',
     component: PostCreate,
     meta: setMeta(true, false),
+  },
+  {
+    path: '/oauth2/callback',
+    component: OAuth2Callback,
+    meta: setMeta(false, false),
   },
   // 에러 관련
   {

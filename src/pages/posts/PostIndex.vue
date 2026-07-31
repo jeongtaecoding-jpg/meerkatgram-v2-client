@@ -76,9 +76,9 @@ onBeforeUnmount(postIndexStore.clearPostIndex);        // 로그인 등 다른 �
   </div>
   <MyButton
     v-if="!postIndexStore.isLastPage"
-    :color="'gray'"
-    :size="'big'"
-    :content="'Show more posts from jeongtae'"
+    :btnStyle="'gray'"
+    :btnSize="'big'"
+    :btnContent="'Show more posts from jeongtae'"
     @click="getNextPage()"
   />
 </template>
